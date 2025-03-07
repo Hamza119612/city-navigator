@@ -1,21 +1,21 @@
-import { IsOptional, IsInt, Min, IsIn, IsString } from 'class-validator';
+import {  IsInt, Min, IsIn, IsString, IsDefined } from 'class-validator';
 import { Type } from 'class-transformer';
 
 export class PaginationDto {
-  @IsOptional()
+  @IsDefined({ message: 'Offset is required' })
   @Type(() => Number)
-  @IsInt()
-  @Min(0)
-  offset?: number = 0;
+  @IsInt({ message: 'Offset must be an integer' })
+  @Min(0, { message: 'Offset cannot be negative' })
+  offset: number;
 
-  @IsOptional()
+  @IsDefined({ message: 'Limit is required' })
   @Type(() => Number)
-  @IsInt()
-  @Min(1)
-  limit?: number = 10;
+  @IsInt({ message: 'Limit must be an integer' })
+  @Min(1, { message: 'Limit must be at least 1' })
+  limit: number;
 
-  @IsOptional()
-  @IsString()
-  @IsIn(['asc', 'desc'])
-  sort?: 'asc' | 'desc' = 'asc';
+  @IsDefined({ message: 'Sort order is required' })
+  @IsString({ message: 'Sort must be a string' })
+  @IsIn(['asc', 'desc'], { message: 'Sort must be either "asc" or "desc"' })
+  sort: 'asc' | 'desc';
 }

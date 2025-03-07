@@ -1,32 +1,37 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ILike, Repository } from 'typeorm';
 import { City } from '../../database/entities/city.entity';
 import { Logger } from '../../common/logger';
 import { PaginationDto } from './dtos/pagination.dto';
-import { ICityRepository } from './interfaces/city.repository.interface';
+import { CityRepositoryAbstract } from './interfaces/city.repository.interface';
 
 @Injectable()
 export class CitiesService {
   constructor(
-    private readonly cityRepository: ICityRepository
+    @Inject(CityRepositoryAbstract) 
+    private readonly cityRepository: CityRepositoryAbstract,
   ) {}
 
   async findAll(paginationDto: PaginationDto): Promise<City[]> {
-    const { offset = 0, limit = 10, sort = 'asc' } = paginationDto;
+    const { offset, limit, sort } = paginationDto;
+    Logger.log(`Fetching all cities with offset=${offset}, limit=${limit}, sort=${sort}`);
     return this.cityRepository.findAll(offset, limit, sort);
   }
 
   async findOne(id: number): Promise<City> {
     const city = await this.cityRepository.findOne(id);
     if (!city) {
+      Logger.warn(`City with id=${id} not found`);
       throw new NotFoundException(`City with id ${id} not found`);
+      
     }
     return city;
   }
 
   async search(query: string, paginationDto: PaginationDto): Promise<City[]> {
     const { offset, limit, sort } = paginationDto;
+    Logger.log(`Searching for cities with query="${query}", offset=${offset}, limit=${limit}, sort=${sort}`);
     return this.cityRepository.search(query, offset, limit, sort);
   }
 }
