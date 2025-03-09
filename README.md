@@ -1,134 +1,109 @@
-# City Navigator
+# City Navigator 🌆
 
-## 📌 Project Overview
+## Overview
 
-City Navigator is a web application that allows users to browse, search, and view details about cities worldwide. The app provides an interactive and user-friendly experience with a structured backend and a sleek frontend.
+City Navigator is a full-stack application for exploring cities worldwide, built with NestJS and React.
 
----
+## Features
 
-## ⚙️ Installation & Setup
+### Backend
 
-### **1️⃣ Clone the Repository**
+- ✅ REST API with pagination and sorting
+- ✅ Search functionality (by name, country)
+- ✅ PostgreSQL database with TypeORM
+- ✅ Unit & Integration tests
+- ✅ Docker setup
+
+### Frontend
+
+- ✅ Responsive city listing with sorting
+- ✅ Search functionality
+- ✅ Pagination
+- ✅ React Query for data management
+- ✅ Unit tests with Vitest
+
+## Quick Start
+
+### Prerequisites
+
+- Node.js >= 18
+- Docker & Docker Compose
+- Yarn/npm
+
+### Development Setup
+
+1. **Clone & Install**
 
 ```bash
-git clone https://github.com/your-repo/city-navigator.git
+git clone https://github.com/Hamza119612/city-navigator.git
 cd city-navigator
 ```
 
-## 🛠 Set Up Environment Variables
-
-### Create a `.env` file in the root directory:
-
-```ini
-DB_USERNAME=postgres
-DB_PASSWORD=yourpassword
-DB_NAME=city_navigator
-DB_HOST=database
-DB_PORT=5432
-```
-
-### Create a `.env` file inside the `backend/` folder:
-
-```ini
-PORT=3000
-DB_HOST=database
-DB_PORT=5432
-DB_USERNAME=postgres
-DB_PASSWORD=yourpassword
-DB_NAME=city_navigator
-```
-
-## 🚀 Start Database
-
-Run the following command to start the backend and database:
+2. **Environment Setup**
 
 ```bash
-docker-compose up --build -d
+# Root directory
+cp .env.example .env
+
+# Backend
+cd backend
+cp .env.example .env
 ```
 
-This will start:
-
-- PostgreSQL database (port `5432`)
-
-## 🎨 Start the Frontend
-
-Navigate to the `backend/` directory and install dependencies:
+3. **Start Services**
 
 ```bash
+# Start database
+docker-compose up -d
+
 cd backend
 yarn install
-```
-
-Run the backend:
-
-```bash
 yarn start:dev
-```
 
-## 🎨 Start the Frontend
-
-Navigate to the `frontend/` directory and install dependencies:
-
-```bash
 cd frontend
 yarn install
-```
-
-Run the frontend:
-
-```bash
 yarn dev
 ```
 
-The app will be available at [http://localhost:5173](http://localhost:5173) (or another Vite dev server port).
+Visit `http://localhost:5173` in your browser.
 
----
+## Testing
 
-## 🚀 Backend Features (NestJS + PostgreSQL)
+```bash
+# Backend tests
+cd backend
+yarn test
+yarn test:e2e
+yarn test:coverage
 
-- REST API for cities (`GET`, `SEARCH`)
-- Pagination & Sorting for large datasets
-- Search Functionality (by name, country)
-- TypeORM for database interaction
-- Logging & Error Handling
-- Unit & Integration Testing with Jest
-- Dockerized Setup for easy deployment
+# Frontend tests
+cd frontend
+yarn test:watch
+yarn test:coverage
+```
 
-## 🎨 Frontend Features (React + Vite )
+## Project Structure
 
-- Table-based City Listing with expandable details
-- Search (by name, country)
-- Expandable Rows to show additional city details
-- Pagination for smooth navigation
-- API Integration with the backend
+```
+city-navigator/
+├── backend/                # NestJS backend
+│   ├── src/
+│   │   ├── modules/       # Feature modules
+│   │   ├── database/      # Database configuration
+│   │   └── main.ts        # Application entry
+│   └── test/              # Test files
+├── frontend/              # React frontend
+│   ├── src/
+│   │   ├── components/    # Reusable components
+│   │   ├── hooks/        # Custom hooks
+│   │   ├── pages/        # Page components
+│   │   └── services/     # API services
+│   └── tests/            # Test files
+└── docker-compose.yml    # Docker configuration
+```
 
-## 🛠️ Tools & Frameworks
+## License
 
-### Backend (NestJS)
+[MIT License](LICENSE)
 
-- **NestJS** (TypeScript-based backend framework)
-- **TypeORM** (ORM for PostgreSQL)
-- **Jest** (Testing framework)
-- **Docker Compose** (Containerized setup)
-- **PostgreSQL** (Relational database)
-
-### Frontend (React + Vite)
-
-- **React (Vite)** (Fast frontend development framework)
-- **Axios / Fetch API** (To interact with the backend)
-- **React Query** (For data fetching & caching)
-
----
-
----
-
-## 🏗️ Future Improvements
-
-- Favorites & Bookmarking Cities
-- Interactive Map with City Locations
-
----
-
-## 📜 License
-
-This project is open-source and available under the **MIT License**.
+## Contact
