@@ -12,13 +12,13 @@ export class CitiesController {
   async searchCities(
     @Query('q') query: string,
     @Query() paginationDto: PaginationDto,
-  ): Promise<City[]> {
+  ): Promise<{ cities: City[]; total: number }> {
     return await this.citiesService.search(query, paginationDto);
   }
 
   @Get()
-  async getAllCities(@Query() paginationDto: PaginationDto): Promise<City[]> {
-    return await this.citiesService.findAll(paginationDto);
+  async getCities(@Query() paginationDto: PaginationDto) {
+    return this.citiesService.findAll(paginationDto);
   }
 
   @Get(':id')

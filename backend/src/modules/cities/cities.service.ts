@@ -13,11 +13,13 @@ export class CitiesService {
     private readonly cityRepository: CityRepositoryAbstract,
   ) {}
 
-  async findAll(paginationDto: PaginationDto): Promise<City[]> {
+  async findAll(paginationDto: PaginationDto): Promise<{ cities: City[]; total: number }> {
     const { offset, limit, sort } = paginationDto;
     Logger.log(`Fetching all cities with offset=${offset}, limit=${limit}, sort=${sort}`);
+  
     return this.cityRepository.findAll(offset, limit, sort);
   }
+  
 
   async findOne(id: number): Promise<City> {
     const city = await this.cityRepository.findOne(id);
@@ -29,7 +31,8 @@ export class CitiesService {
     return city;
   }
 
-  async search(query: string, paginationDto: PaginationDto): Promise<City[]> {
+  async search(query: string, paginationDto: PaginationDto): Promise<{ cities: City[]; total: number }> {
+    console.log("🚀 ~ CitiesService ~ search ~ query:", query)
     const { offset, limit, sort } = paginationDto;
     Logger.log(`Searching for cities with query="${query}", offset=${offset}, limit=${limit}, sort=${sort}`);
     return this.cityRepository.search(query, offset, limit, sort);
