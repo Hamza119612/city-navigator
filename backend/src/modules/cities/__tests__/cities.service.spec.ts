@@ -9,6 +9,19 @@ describe('CitiesService', () => {
   let citiesService: CitiesService;
   let cityRepository: jest.Mocked<CityRepositoryAbstract>;
 
+  const mockCity: City = {
+    id: 1,
+    name: 'Berlin',
+    nameNative: 'Berlin',
+    country: 'Germany',
+    population: 3669495,
+    founded: 1237,
+    landmarks: ['Brandenburg Gate'],
+    continent: 'Europe',
+    latitude: 52.52,
+    longitude: 13.405,
+  };
+
   beforeEach(async () => {
     const cityRepositoryMock: Partial<CityRepositoryAbstract> = {
       findAll: jest.fn(),
@@ -34,10 +47,10 @@ describe('CitiesService', () => {
 
   describe('findAll()', () => {
     it('should return a list of cities', async () => {
-      const mockCities: City[] = [
-        { id: 1, name: 'Berlin', country: 'Germany' } as City,
-        { id: 2, name: 'Paris', country: 'France' } as City,
-      ];
+      const mockCities = {
+        cities: [mockCity],
+        total: 1
+      };
 
       cityRepository.findAll.mockResolvedValue(mockCities);
 
@@ -52,8 +65,6 @@ describe('CitiesService', () => {
 
   describe('findOne()', () => {
     it('should return a city by ID', async () => {
-      const mockCity: City = { id: 1, name: 'Berlin', country: 'Germany' } as City;
-
       cityRepository.findOne.mockResolvedValue(mockCity);
 
       const result = await citiesService.findOne(1);
@@ -73,29 +84,31 @@ describe('CitiesService', () => {
 
   describe('search()', () => {
     it('should return cities matching a search query', async () => {
-      const mockCities: City[] = [
-        { id: 1, name: 'New York', country: 'USA' } as City,
-        { id: 2, name: 'New Delhi', country: 'India' } as City,
-      ];
+      const mockSearchResult = {
+        cities: [mockCity],
+        total: 1
+      };
 
-      cityRepository.search.mockResolvedValue(mockCities);
+      cityRepository.search.mockResolvedValue(mockSearchResult);
 
       const pagination: PaginationDto = { offset: 0, limit: 10, sort: 'asc' };
-      const result = await citiesService.search('New', pagination);
+      const result = await citiesService.search('Berlin', pagination);
 
-      expect(result).toEqual(mockCities);
-      expect(cityRepository.search).toHaveBeenCalledWith('New', 0, 10, 'asc');
+      expect(result).toEqual(mockSearchResult);
+      expect(cityRepository.search).toHaveBeenCalledWith('Berlin', 0, 10, 'asc');
       expect(cityRepository.search).toHaveBeenCalledTimes(1);
     });
 
-    it('should return an empty array if no cities match', async () => {
-      cityRepository.search.mockResolvedValue([]);
+    it('should return empty result if no cities match', async () => {
+      const emptyResult = { cities: [], total: 0 };
+      cityRepository.search.mockResolvedValue(emptyResult);
 
       const pagination: PaginationDto = { offset: 0, limit: 10, sort: 'asc' };
       const result = await citiesService.search('Unknown', pagination);
 
-      expect(result).toEqual([]);
+      expect(result).toEqual(emptyResult);
       expect(cityRepository.search).toHaveBeenCalledWith('Unknown', 0, 10, 'asc');
+      expect(cityRepository.search).toHaveBeenCalledTimes(1);
     });
   });
 });

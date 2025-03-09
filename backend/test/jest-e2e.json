@@ -5,5 +5,17 @@
   "testRegex": ".e2e-spec.ts$",
   "transform": {
     "^.+\\.(t|j)s$": "ts-jest"
-  }
+  },
+  "collectCoverage": true,
+  "coverageDirectory": "coverage",
+  "coveragePathIgnorePatterns": [
+    "/node_modules/",
+    "<rootDir>/src/config/",
+    "<rootDir>/src/database/entities/",
+    "<rootDir>/src/modules/.*/dtos/",
+    "<rootDir>/src/modules/.*/interfaces/",
+    "<rootDir>/src/modules/.*/cities\\.module\\.ts",
+    "<rootDir>/src/modules/.*/repository/",
+    "<rootDir>/src/seed/"
+  ]
 }

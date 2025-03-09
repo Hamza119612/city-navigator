@@ -32,7 +32,6 @@ export class CitiesService {
   }
 
   async search(query: string, paginationDto: PaginationDto): Promise<{ cities: City[]; total: number }> {
-    console.log("🚀 ~ CitiesService ~ search ~ query:", query)
     const { offset, limit, sort } = paginationDto;
     Logger.log(`Searching for cities with query="${query}", offset=${offset}, limit=${limit}, sort=${sort}`);
     return this.cityRepository.search(query, offset, limit, sort);
