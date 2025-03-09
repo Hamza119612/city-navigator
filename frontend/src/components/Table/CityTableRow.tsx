@@ -14,18 +14,26 @@ const CityTableRow: React.FC<CityTableRowProps> = ({ city }) => {
   return (
     <>
       <tr className="city-table-row">
-        <td className="toggle-cell">
+        <td className="toggle-cell" data-label="">
           <button onClick={toggleRow} className="toggle-button" aria-label="Toggle landmarks">
             {isOpen ? '➖' : '➕'}
           </button>
         </td>
-        <td data-testid="city-name" className="city-name">
+        <td data-testid="city-name" className="city-name" data-label="City">
           {city.name}
         </td>
-        <td className="city-name-native">{city.nameNative}</td>
-        <td className="city-country">{city.country}</td>
-        <td className="city-population">{city.population}</td>
-        <td className="city-founded">{city.founded}</td>
+        <td className="city-name-native" data-label="Native Name">
+          {city.nameNative}
+        </td>
+        <td className="city-country" data-label="Country">
+          {city.country}
+        </td>
+        <td className="city-population" data-label="Population">
+          {city.population}
+        </td>
+        <td className="city-founded" data-label="Founded">
+          {city.founded}
+        </td>
       </tr>
       {isOpen && (
         <tr className="city-landmarks-row">

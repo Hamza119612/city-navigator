@@ -1,0 +1,16 @@
+/* SearchBar.css */
+.search-bar-input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+
+/* Responsive adjustments for smaller screens */
+@media screen and (max-width: 600px) {
+  .search-bar-input {
+    padding: 8px;
+    font-size: 14px;
+  }
+}

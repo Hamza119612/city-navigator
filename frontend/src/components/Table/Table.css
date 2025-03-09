@@ -1,38 +1,87 @@
-.pagination-container {
-    display: flex;
-    align-items: center;
-  }
-  
-  .pagination-info {
-    margin: 0 10px;
-  }
-.city-table-row {
-  /* Add desired row styling here */
+.sortable {
+  cursor: pointer;
+  user-select: none;
 }
 
-.toggle-cell {
-  /* Optional: styling for spacing or alignment */
+.sort-icon {
+  margin-left: 5px;
+}
+
+.table-container {
+  overflow-x: auto;
+  margin: 1rem 0;
+}
+
+.city-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.city-table th,
+.city-table td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.city-table-row:nth-child(even) {
+  background-color: #033101;
 }
 
 .toggle-button {
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 1em;
+  font-size: 1rem;
 }
 
-.city-name,
-.city-name-native,
-.city-country,
-.city-population,
-.city-founded {
-  /* Add any shared or individual styling if needed */
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
 }
 
-.city-landmarks-row {
-  background-color: #f9f9f9;
+.pagination-container button {
+  padding: 0.5rem 1rem;
+  margin: 0 5px;
+  cursor: pointer;
 }
 
-.landmarks-cell {
-  padding: 10px;
+.pagination-info {
+  font-weight: bold;
+}
+
+@media screen and (max-width: 600px) {
+  .city-table thead {
+    display: none;
+  }
+
+  .city-table tr {
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  .city-table td {
+    display: block;
+    text-align: right;
+    position: relative;
+    padding-left: 50%;
+    border: none;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .city-table td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 10px;
+    width: calc(50% - 20px);
+    text-align: left;
+    font-weight: bold;
+  }
+
+  .toggle-cell {
+    text-align: center;
+    padding-left: 10px;
+  }
 }

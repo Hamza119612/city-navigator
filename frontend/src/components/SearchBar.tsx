@@ -1,11 +1,13 @@
-import React, { useState, useDeferredValue, useEffect } from 'react';
+// src/components/SearchBar.tsx
+import React, { useState, useDeferredValue, useEffect } from "react";
+import "./SearchBar.css";
 
 interface SearchBarProps {
   onSearch: (query: string) => void;
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState("");
   const deferredQuery = useDeferredValue(query);
 
   useEffect(() => {
@@ -18,12 +20,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
       placeholder="Search City..."
       value={query}
       onChange={(e) => setQuery(e.target.value)}
-      style={{
-        width: '100%',
-        padding: '10px',
-        fontSize: '16px',
-        marginBottom: '10px',
-      }}
+      className="search-bar-input"
     />
   );
 };

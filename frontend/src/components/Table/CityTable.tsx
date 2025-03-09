@@ -1,8 +1,9 @@
 // src/components/CityTable.tsx
-import React from 'react';
-import CityTableRow from './CityTableRow';
-import CityTablePagination from './CityTablePagination';
-import { City } from '../../types/city';
+import React from "react";
+import CityTableRow from "./CityTableRow";
+import CityTablePagination from "./CityTablePagination";
+import { City } from "../../types/city";
+import "./Table.css";
 
 interface CityTableProps {
   cities: City[];
@@ -14,13 +15,17 @@ interface CityTableProps {
   onPageChange: (page: number) => void;
 }
 
-const CityTable: React.FC<CityTableProps> = ({ cities, pagination, onPageChange }) => {
+const CityTable: React.FC<CityTableProps> = ({
+  cities,
+  pagination,
+  onPageChange,
+}) => {
   const { total, currentPage, pageSize } = pagination;
   const totalPages = Math.ceil(total / pageSize);
 
   return (
-    <div>
-      <table cellPadding="10" cellSpacing="0" width="100%">
+    <div className="table-container">
+      <table className="city-table">
         <thead>
           <tr>
             <th></th>

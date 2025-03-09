@@ -1,3 +1,4 @@
+// src/components/CityTablePagination.tsx
 import React from 'react';
 import './Table.css';
 
