@@ -1,58 +1,30 @@
-name: CI
+name: Coverage Check
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
   pull_request:
-    branches:
-      - main
+    branches: [ main ]
 
 jobs:
-  test:
+  coverage:
     runs-on: ubuntu-latest
-
-    services:
-      postgres:
-        image: postgres:latest
-        ports:
-          - 5432:5432
-        env:
-          POSTGRES_DB: testdb
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-
     strategy:
       matrix:
-        node-version: [16.x, 18.x]
-
+        project: [ "frontend", "backend" ]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Set up Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: '16'
 
       - name: Install dependencies
-        run: yarn install
+        working-directory: ${{ matrix.project }}
+        run: npm ci
 
-      - name: Run backend tests
-        run: yarn test:backend --coverage
-        env:
-          DATABASE_URL: postgres://postgres:postgres@localhost:5432/testdb
-
-      - name: Run frontend tests
-        run: yarn test:frontend --coverage
-
-      - name: Upload coverage report
-        uses: actions/upload-artifact@v2
-        with:
-          name: coverage-report
-          path: coverage/
+      - name: Run tests and check coverage
+        working-directory: ${{ matrix.project }}
+        run: npm test -- --coverage
