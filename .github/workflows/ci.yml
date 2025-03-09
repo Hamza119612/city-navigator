@@ -23,7 +23,7 @@ jobs:
 
       - name: Install dependencies
         working-directory: ${{ matrix.project }}
-        run: yarn install
+        run: yarn 
 
       - name: Run tests and check coverage
         working-directory: ${{ matrix.project }}
