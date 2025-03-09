@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import { useCities } from "../hooks/useCities";
 import CityTable from "../components/Table/CityTable";
 import SearchBar from "../components/SearchBar";

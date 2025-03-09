@@ -1,7 +1,6 @@
-// src/components/CityTableRow.tsx
-import React, { useState } from 'react';
-import { City } from '../../types/city';
-import './Table.css';
+import React, { useState } from "react";
+import { City } from "../../types/city";
+import "./Table.css";
 
 interface CityTableRowProps {
   city: City;
@@ -15,8 +14,12 @@ const CityTableRow: React.FC<CityTableRowProps> = ({ city }) => {
     <>
       <tr className="city-table-row">
         <td className="toggle-cell" data-label="">
-          <button onClick={toggleRow} className="toggle-button" aria-label="Toggle landmarks">
-            {isOpen ? '➖' : '➕'}
+          <button
+            onClick={toggleRow}
+            className="toggle-button"
+            aria-label="Toggle landmarks"
+          >
+            {isOpen ? "➖" : "➕"}
           </button>
         </td>
         <td data-testid="city-name" className="city-name" data-label="City">
@@ -38,7 +41,7 @@ const CityTableRow: React.FC<CityTableRowProps> = ({ city }) => {
       {isOpen && (
         <tr className="city-landmarks-row">
           <td colSpan={6} className="landmarks-cell">
-            <strong>Landmarks:</strong> {city.landmarks.join(', ')}
+            <strong>Landmarks:</strong> {city.landmarks.join(", ")}
           </td>
         </tr>
       )}

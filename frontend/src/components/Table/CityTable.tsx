@@ -1,4 +1,3 @@
-// src/components/CityTable.tsx
 import React from "react";
 import CityTableRow from "./CityTableRow";
 import CityTablePagination from "./CityTablePagination";

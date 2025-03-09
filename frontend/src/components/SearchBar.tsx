@@ -1,4 +1,3 @@
-// src/components/SearchBar.tsx
 import React, { useState, useDeferredValue, useEffect } from "react";
 import "./SearchBar.css";
 

@@ -1,6 +1,5 @@
-// src/components/CityTablePagination.tsx
-import React from 'react';
-import './Table.css';
+import React from "react";
+import "./Table.css";
 
 interface CityTablePaginationProps {
   currentPage: number;
