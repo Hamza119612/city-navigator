@@ -1,0 +1,38 @@
+.pagination-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .pagination-info {
+    margin: 0 10px;
+  }
+.city-table-row {
+  /* Add desired row styling here */
+}
+
+.toggle-cell {
+  /* Optional: styling for spacing or alignment */
+}
+
+.toggle-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+.city-name,
+.city-name-native,
+.city-country,
+.city-population,
+.city-founded {
+  /* Add any shared or individual styling if needed */
+}
+
+.city-landmarks-row {
+  background-color: #f9f9f9;
+}
+
+.landmarks-cell {
+  padding: 10px;
+}

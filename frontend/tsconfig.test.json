@@ -2,9 +2,10 @@
   "extends": "./tsconfig.app.json",
   "compilerOptions": {
     "jsx": "react",                       // Ensure JSX is enabled
+    "module": "ESNext",
     "esModuleInterop": true,              // Enable default import interop
     "allowSyntheticDefaultImports": true,
-    "types": ["jest", "node", "@testing-library/jest-dom"],
+    "types": ["vitest/globals", "node", "@testing-library/jest-dom"],
   },
   "include": ["src", "__tests__"]
 }

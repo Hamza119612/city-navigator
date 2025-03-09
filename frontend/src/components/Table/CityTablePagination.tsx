@@ -1,4 +1,5 @@
 import React from 'react';
+import './Table.css';
 
 interface CityTablePaginationProps {
   currentPage: number;
@@ -10,24 +11,28 @@ const CityTablePagination: React.FC<CityTablePaginationProps> = ({
   currentPage,
   totalPages,
   onPageChange,
-}) => (
-  <div style={{ marginTop: '10px', textAlign: 'center' }}>
-    <button 
-      onClick={() => onPageChange(currentPage - 1)} 
-      disabled={currentPage === 1}
-    >
-      ⬅ Previous
-    </button>
-    <span style={{ margin: '0 10px' }}>
-      Page {currentPage} of {totalPages}
-    </span>
-    <button 
-      onClick={() => onPageChange(currentPage + 1)} 
-      disabled={currentPage >= totalPages}
-    >
-      Next ➡
-    </button>
-  </div>
-);
+}) => {
+  return (
+    <nav className="pagination-container" aria-label="City Table Pagination">
+      <button
+        onClick={() => onPageChange(currentPage - 1)}
+        disabled={currentPage === 1}
+        aria-label="Go to previous page"
+      >
+        ⬅ Previous
+      </button>
+      <span className="pagination-info">
+        Page {currentPage} of {totalPages}
+      </span>
+      <button
+        onClick={() => onPageChange(currentPage + 1)}
+        disabled={currentPage >= totalPages}
+        aria-label="Go to next page"
+      >
+        Next ➡
+      </button>
+    </nav>
+  );
+};
 
-export default CityTablePagination;
+export default React.memo(CityTablePagination);
